@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nhớ Em</title>
     <style>
-        /* Reset and Base Styling */
+        /* Reset và Styling cơ bản */
         * {
             margin: 0;
             padding: 0;
@@ -21,10 +21,10 @@
             align-items: center;
             color: #333;
             overflow: hidden;
-            position: relative; /* Needed for absolutely positioned elements */
+            position: relative; /* Cần thiết cho các phần tử được định vị tuyệt đối */
         }
 
-        /* Container styling */
+        /* Styling Container */
         .container {
             text-align: center;
             position: relative;
@@ -32,7 +32,7 @@
             background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-            z-index: 1; /* Ensure container stays above moving images */
+            z-index: 1; /* Đảm bảo container nằm trên các hình ảnh di chuyển */
         }
 
         .container h1 {
@@ -94,7 +94,7 @@
             }
         }
 
-        /* Improved Floating hearts */
+        /* Floating hearts */
         .heart {
             position: absolute;
             width: 20px;
@@ -106,7 +106,7 @@
             transition: transform 0.3s, opacity 0.3s;
         }
 
-        /* Creating heart shape using pseudo-elements */
+        /* Tạo hình trái tim bằng pseudo-elements */
         .heart::before,
         .heart::after {
             content: "";
@@ -132,7 +132,7 @@
             opacity: 1;
         }
 
-        /* Positioning multiple hearts with varied colors and animations */
+        /* Định vị nhiều trái tim với màu sắc và animation khác nhau */
         .heart:nth-child(2) { top: 10%; left: 20%; animation-duration: 5s; background-color: #ff9a9e; }
         .heart:nth-child(3) { top: 15%; left: 70%; animation-duration: 6s; background-color: #fad0c4; }
         .heart:nth-child(4) { top: 40%; left: 10%; animation-duration: 4.5s; background-color: #ff6f61; }
@@ -157,47 +157,47 @@
             }
         }
 
-        /* Styles for Animated Loved One Images */
+        /* Styles cho hình ảnh người thân được hoạt hình */
         .lovedOne {
             position: absolute;
             width: 100px;
-            height: 100px; /* Thiết lập chiều cao cố định */
-            object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung mà không bị biến dạng */
+            height: 100px; /* Chiều cao cố định */
+            object-fit: cover; /* Hình ảnh lấp đầy khung mà không bị biến dạng */
             border-radius: 50%;
             opacity: 0.9;
             animation: moveAcross 10s linear infinite;
-            /* Add a slight shadow for depth */
+            /* Thêm bóng để tạo độ sâu */
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* Different animations for each lovedOne image */
-        .lovedOne:nth-of-type(1) { /* First lovedOne */
+        /* Animations khác nhau cho từng hình ảnh lovedOne */
+        .lovedOne:nth-of-type(1) { /* Hình ảnh thứ nhất */
             top: 10%;
             left: -10%;
             animation: move1 12s linear infinite;
         }
-        .lovedOne:nth-of-type(2) { /* Second lovedOne */
+        .lovedOne:nth-of-type(2) { /* Hình ảnh thứ hai */
             top: 30%;
             left: 100%;
             animation: move2 14s linear infinite;
         }
-        .lovedOne:nth-of-type(3) { /* Third lovedOne */
+        .lovedOne:nth-of-type(3) { /* Hình ảnh thứ ba */
             top: 50%;
             left: -15%;
             animation: move3 10s linear infinite;
         }
-        .lovedOne:nth-of-type(4) { /* Fourth lovedOne */
+        .lovedOne:nth-of-type(4) { /* Hình ảnh thứ tư */
             top: 70%;
             left: 100%;
             animation: move4 16s linear infinite;
         }
-        .lovedOne:nth-of-type(5) { /* Fifth lovedOne */
+        .lovedOne:nth-of-type(5) { /* Hình ảnh thứ năm */
             top: 90%;
             left: -20%;
             animation: move5 18s linear infinite;
         }
 
-        /* Keyframes for moving images across the screen */
+        /* Keyframes cho chuyển động hình ảnh */
         @keyframes move1 {
             0% { transform: translate(0, 0) scale(1); opacity: 0.9; }
             25% { transform: translate(50vw, -20vh) scale(1.1); opacity: 0.8; }
@@ -269,12 +269,49 @@
 
             .lovedOne {
                 width: 70px;
-                height: 70px; /* Thiết lập chiều cao tương ứng */
+                height: 70px; /* Chiều cao tương ứng */
             }
+
+            #toggle-music {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Styling Nút Bật/Tắt Âm Thanh */
+        #toggle-music {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000; /* Đảm bảo nút luôn trên cùng */
+        }
+
+        #toggle-music:hover {
+            background-color: #ff9a9e;
+        }
+
+        /* Ẩn thẻ audio */
+        #background-music {
+            display: none;
         }
     </style>
 </head>
 <body>
+<!-- Nút bật/tắt âm thanh -->
+<button id="toggle-music">Tắt nhạc</button>
+
+<!-- Thẻ audio để phát nhạc từ nguồn trực tuyến -->
+<audio id="background-music" autoplay loop>
+    <!-- Thay thế liên kết sau bằng liên kết trực tiếp đến file MP3 của bạn -->
+    <source src="./MatKetNoi-DuongDomic-16783113.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container">
     <h1>Anh Nhớ Em</h1>
     <p>Một cảm giác không thể tả...</p>
@@ -298,5 +335,32 @@
 <img src="./love3.JPG" alt="Loved One 3" class="lovedOne">
 <img src="./love4.JPG" alt="Loved One 4" class="lovedOne">
 <img src="./love5.JPG" alt="Loved One 5" class="lovedOne">
+
+<!-- JavaScript cho nút bật/tắt âm thanh -->
+<script>
+    const toggleButton = document.getElementById('toggle-music');
+    const audio = document.getElementById('background-music');
+
+    // Chức năng bật/tắt âm thanh
+    toggleButton.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            toggleButton.textContent = 'Tắt nhạc';
+        } else {
+            audio.pause();
+            toggleButton.textContent = 'Bật nhạc';
+        }
+    });
+
+    // Tự động phát nhạc khi trang tải (có thể bị chặn bởi trình duyệt)
+    window.onload = () => {
+        audio.play().catch(error => {
+            console.log('Autoplay bị chặn:', error);
+            // Bạn có thể hiển thị một thông báo cho người dùng để bật âm thanh
+            // Ví dụ:
+            // alert('Vui lòng nhấn nút "Bật nhạc" để nghe nhạc nền.');
+        });
+    };
+</script>
 </body>
 </html>
