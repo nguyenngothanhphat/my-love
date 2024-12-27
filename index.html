@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhớ Em</title>
+    <style>
+        /* Reset and Base Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom right, #ffecd2, #fcb69f);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            overflow: hidden;
+            position: relative; /* Needed for absolutely positioned elements */
+        }
+
+        /* Container styling */
+        .container {
+            text-align: center;
+            position: relative;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1; /* Ensure container stays above moving images */
+        }
+
+        .container h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: #ff6f61;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .container p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+            animation: slideIn 3s ease-out;
+        }
+
+        .container img {
+            width: 250px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            animation: float 3s infinite ease-in-out;
+            transition: transform 0.3s;
+        }
+
+        .container img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Improved Floating hearts */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6f61;
+            transform: rotate(-45deg);
+            animation: heartFloat 4s infinite ease-in-out;
+            opacity: 0.8;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        /* Creating heart shape using pseudo-elements */
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6f61;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        .heart:hover {
+            transform: rotate(-45deg) scale(1.5);
+            opacity: 1;
+        }
+
+        /* Positioning multiple hearts with varied colors and animations */
+        .heart:nth-child(2) { top: 10%; left: 20%; animation-duration: 5s; background-color: #ff9a9e; }
+        .heart:nth-child(3) { top: 15%; left: 70%; animation-duration: 6s; background-color: #fad0c4; }
+        .heart:nth-child(4) { top: 40%; left: 10%; animation-duration: 4.5s; background-color: #ff6f61; }
+        .heart:nth-child(5) { top: 60%; left: 80%; animation-duration: 5.5s; background-color: #ff9a9e; }
+        .heart:nth-child(6) { top: 25%; left: 50%; animation-duration: 6.5s; background-color: #fad0c4; }
+        .heart:nth-child(7) { top: 70%; left: 30%; animation-duration: 4.2s; background-color: #ff6f61; }
+        .heart:nth-child(8) { top: 80%; left: 60%; animation-duration: 5.8s; background-color: #ff9a9e; }
+        .heart:nth-child(9) { top: 35%; left: 85%; animation-duration: 6.3s; background-color: #fad0c4; }
+        .heart:nth-child(10){ top: 50%; left: 40%; animation-duration: 4.7s; background-color: #ff6f61; }
+
+        @keyframes heartFloat {
+            0% {
+                transform: rotate(-45deg) translateY(0) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: rotate(-45deg) translateY(-150px) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Styles for Animated Loved One Images */
+        .lovedOne {
+            position: absolute;
+            width: 100px;
+            height: 100px; /* Thiết lập chiều cao cố định */
+            object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung mà không bị biến dạng */
+            border-radius: 50%;
+            opacity: 0.9;
+            animation: moveAcross 10s linear infinite;
+            /* Add a slight shadow for depth */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Different animations for each lovedOne image */
+        .lovedOne:nth-of-type(1) { /* First lovedOne */
+            top: 10%;
+            left: -10%;
+            animation: move1 12s linear infinite;
+        }
+        .lovedOne:nth-of-type(2) { /* Second lovedOne */
+            top: 30%;
+            left: 100%;
+            animation: move2 14s linear infinite;
+        }
+        .lovedOne:nth-of-type(3) { /* Third lovedOne */
+            top: 50%;
+            left: -15%;
+            animation: move3 10s linear infinite;
+        }
+        .lovedOne:nth-of-type(4) { /* Fourth lovedOne */
+            top: 70%;
+            left: 100%;
+            animation: move4 16s linear infinite;
+        }
+        .lovedOne:nth-of-type(5) { /* Fifth lovedOne */
+            top: 90%;
+            left: -20%;
+            animation: move5 18s linear infinite;
+        }
+
+        /* Keyframes for moving images across the screen */
+        @keyframes move1 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+            25% { transform: translate(50vw, -20vh) scale(1.1); opacity: 0.8; }
+            50% { transform: translate(100vw, 0) scale(1); opacity: 0.9; }
+            75% { transform: translate(50vw, 20vh) scale(0.9); opacity: 0.8; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+        }
+
+        @keyframes move2 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+            25% { transform: translate(-50vw, -15vh) scale(1.05); opacity: 0.75; }
+            50% { transform: translate(-100vw, 0) scale(1); opacity: 0.85; }
+            75% { transform: translate(-50vw, 15vh) scale(0.95); opacity: 0.75; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+        }
+
+        @keyframes move3 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+            25% { transform: translate(50vw, 10vh) scale(1.1); opacity: 0.8; }
+            50% { transform: translate(100vw, 0) scale(1); opacity: 0.9; }
+            75% { transform: translate(50vw, -10vh) scale(0.95); opacity: 0.8; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+        }
+
+        @keyframes move4 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+            25% { transform: translate(-50vw, 20vh) scale(1.05); opacity: 0.75; }
+            50% { transform: translate(-100vw, 0) scale(1); opacity: 0.85; }
+            75% { transform: translate(-50vw, -20vh) scale(0.95); opacity: 0.75; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+        }
+
+        @keyframes move5 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+            25% { transform: translate(50vw, -25vh) scale(1.1); opacity: 0.8; }
+            50% { transform: translate(100vw, 0) scale(1); opacity: 0.9; }
+            75% { transform: translate(50vw, 25vh) scale(0.95); opacity: 0.8; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .container h1 {
+                font-size: 2.5rem;
+            }
+
+            .container p {
+                font-size: 1rem;
+            }
+
+            .container img {
+                width: 200px;
+            }
+
+            .heart {
+                width: 15px;
+                height: 15px;
+            }
+
+            .heart::before,
+            .heart::after {
+                width: 15px;
+                height: 15px;
+            }
+
+            .lovedOne {
+                width: 70px;
+                height: 70px; /* Thiết lập chiều cao tương ứng */
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Anh Nhớ Em</h1>
+    <p>Một cảm giác không thể tả...</p>
+    <img src="./love1.JPG" alt="Hình ảnh nhớ em">
+    <!-- Floating hearts -->
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+</div>
+
+<!-- Animated Loved One Images -->
+<img src="./love6.JPG" alt="Loved One 1" class="lovedOne">
+<img src="./love2.JPG" alt="Loved One 2" class="lovedOne">
+<img src="./love3.JPG" alt="Loved One 3" class="lovedOne">
+<img src="./love4.JPG" alt="Loved One 4" class="lovedOne">
+<img src="./love5.JPG" alt="Loved One 5" class="lovedOne">
+</body>
+</html>
